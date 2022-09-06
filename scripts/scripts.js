@@ -276,6 +276,9 @@ export function decorateSections($main) {
     section.classList.add('section');
     section.setAttribute('data-section-status', 'initialized');
 
+    // keys that are set as variables
+    const filterMeta = ['background-image', 'background-filter', 'background-transform'];
+
     /* process section metadata */
     const sectionMeta = section.querySelector('div.section-metadata');
     if (sectionMeta) {
@@ -283,14 +286,20 @@ export function decorateSections($main) {
       Object.entries(meta).forEach(([k, v]) => {
         if (k === 'style') {
           section.classList.add(toClassName(v));
-        } else if (k === 'background') {
-          const [src, pos] = v.split(',');
-          section.style.backgroundImage = `url(${src.trim()})`;
-          section.classList.add('meta-bg');
-          if (pos && pos.trim() && pos.trim() !== 'top') {
-            section.classList.add(`bg-${pos.trim()}`);
-          }
-        } else section.dataset[toCamelCase(k)] = v;
+        } else if (filterMeta.includes(k)) {
+          const metaKey = toClassName(k);
+          section.classList.add(`meta-${metaKey}`);
+
+          const [val, ...attrs] = v.split(',');
+          attrs.forEach((atr) => {
+            section.classList.add(`meta-${metaKey}-${toClassName(atr)}`);
+          });
+
+          const metaVal = metaKey === 'background-image' ? `url("${val}")` : val;
+          section.setAttribute('style', `${section.getAttribute('style') || ''};--meta-${metaKey}: ${metaVal}`);
+        } else {
+          section.dataset[toCamelCase(k)] = v;
+        }
       });
       sectionMeta.remove();
     }

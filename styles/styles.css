@@ -311,3 +311,24 @@ main .section.highlight em {
   color: var(--color-highlight);
   font-style: inherit;
 }
+
+/* section meta */
+main .section.meta-background-image {
+  position: relative;
+}
+
+main .section.meta-background-image::after {
+  content: var(--meta-background-image);
+  position: absolute;
+  top: 0;
+  bottom: 100%;
+  z-index: -100;
+}
+
+main .section.meta-background-filter::after {
+  filter: var(--meta-background-filter);
+}
+
+main .section.meta-background-transform::after {
+  transform: var(--meta-background-transform);
+}
