@@ -51,8 +51,15 @@ main .hero.small img {
 }
 
 @media (min-width: 900px) {
+    main .hero {
+        margin: 0 8rem;
+    }
+
     main .hero.small img {
         max-height: 500px;
     }
-    
+
+    .section.meta-background-image .hero {
+        padding-top: 6rem;
+    }
 }
