@@ -41,11 +41,17 @@ export default async function decorate(block) {
     if (navSections) {
       navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
         if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-        navSection.addEventListener('click', () => {
+        navSection.querySelectorAll('a').forEach((a) => a.classList.add('clickable-area-link'));
+        const handler = (expand) => () => {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
+          if (expand === expanded) return;
+
           collapseAllNavSections(navSections);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        });
+        };
+        navSection.addEventListener('click', handler());
+        navSection.addEventListener('mouseover', handler(true));
+        navSection.addEventListener('mouseout', handler(false));
       });
     }
 

@@ -257,7 +257,7 @@ export function readBlockConfig(block) {
 
 /**
  * Decorates all sections in a container element.
- * @param {Element} $main The container element
+ * @param {HTMLElement} $main The container element
  */
 export function decorateSections($main) {
   $main.querySelectorAll(':scope > div').forEach((section) => {
@@ -280,10 +280,17 @@ export function decorateSections($main) {
     const sectionMeta = section.querySelector('div.section-metadata');
     if (sectionMeta) {
       const meta = readBlockConfig(sectionMeta);
-      const keys = Object.keys(meta);
-      keys.forEach((key) => {
-        if (key === 'style') section.classList.add(toClassName(meta.style));
-        else section.dataset[toCamelCase(key)] = meta[key];
+      Object.entries(meta).forEach(([k, v]) => {
+        if (k === 'style') {
+          section.classList.add(toClassName(v));
+        } else if (k === 'background') {
+          const [src, pos] = v.split(',');
+          section.style.backgroundImage = `url(${src.trim()})`;
+          section.classList.add('meta-bg');
+          if (pos && pos.trim() && pos.trim() !== 'top') {
+            section.classList.add(`bg-${pos.trim()}`);
+          }
+        } else section.dataset[toCamelCase(k)] = v;
       });
       sectionMeta.remove();
     }
@@ -499,11 +506,15 @@ export function decorateButtons(element) {
           && twoup.childNodes.length === 1 && twoup.tagName === 'P') {
           a.className = 'button primary';
           twoup.classList.add('button-container');
+          twoup.append(a);
+          up.remove();
         }
         if (up.childNodes.length === 1 && up.tagName === 'EM'
           && twoup.childNodes.length === 1 && twoup.tagName === 'P') {
           a.className = 'button secondary';
           twoup.classList.add('button-container');
+          twoup.append(a);
+          up.remove();
         }
       }
     }
@@ -604,22 +615,13 @@ window.addEventListener('error', (event) => {
 
 loadPage(document);
 
-function buildHeroBlock(main) {
-  const h1 = main.querySelector('h1');
-  const picture = main.querySelector('picture');
-  // eslint-disable-next-line no-bitwise
-  if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
-    const section = document.createElement('div');
-    section.append(buildBlock('hero', { elems: [picture, h1] }));
-    main.prepend(section);
-  }
-}
-
 function loadHeader(header) {
   const headerBlock = buildBlock('header', '');
   header.append(headerBlock);
   decorateBlock(headerBlock);
-  loadBlock(headerBlock);
+  loadBlock(headerBlock).then(() => {
+    decorateButtons(header);
+  });
 }
 
 function loadFooter(footer) {
@@ -633,9 +635,10 @@ function loadFooter(footer) {
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
+// eslint-disable-next-line no-unused-vars
 function buildAutoBlocks(main) {
   try {
-    buildHeroBlock(main);
+    // noop
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
