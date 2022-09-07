@@ -2,9 +2,9 @@
 header nav {
   display: grid;
   grid-template:
-    'hamburger brand tools' var(--nav-height) 'sections sections sections' 1fr / 50px 1fr 50px;
+    'hamburger brand tools tools' var(--nav-height) 'sections sections sections sections' 1fr / 50px 1fr 50px;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0 1rem;
   position: fixed;
   z-index: 1;
   background-color: var(--color-background);
@@ -168,7 +168,7 @@ header nav *:not(.button-container) > a:any-link:not(:hover) {
 }
 
 /* desktop nav styles */
-@media (min-width: 1000px) {
+@media (min-width: 905px) {
   header nav {
     display: flex;
     justify-content: space-between;

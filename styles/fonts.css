@@ -1,0 +1,75 @@
+/* below the fold CSS goes here */
+
+
+@font-face {
+  font-family: "Gotham Book";
+  src: url('/styles/fonts/GothamBook.otf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 95%;
+}
+@font-face {
+  font-family: "Gotham Book";
+  src: url('/styles/fonts/GothamBookItalic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  size-adjust: 95%;
+}
+@font-face {
+  font-family: Gotham;
+  src: url('/styles/fonts/Gotham-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 95%;
+}
+@font-face {
+  font-family: Gotham;
+  src: url('/styles/fonts/Gotham-Light.otf') format('opentype'), url('/styles/fonts/Gotham-XLight.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 95%;
+}
+@font-face {
+  font-family: Gotham;
+  src: url('/styles/fonts/Gotham-ThinItalic.otf') format('opentype');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+  size-adjust: 95%;
+}
+@font-face {
+  font-family: Gotham;
+  src: url('/styles/fonts/Gotham-UltraItalic.otf') format('opentype'), url('/styles/fonts/Gotham-BookItalic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  size-adjust: 95%;
+}
+@font-face {
+  font-family: Gotham;
+  src: url('/styles/fonts/Gotham-Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 95%;
+}
+@font-face {
+  font-family: Gotham;
+  src: url('/styles/fonts/Gotham-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 95%;
+}
+@font-face {
+  font-family: Gotham;
+  src: url('/styles/fonts/Gotham-XLightItalic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+  size-adjust: 95%;
+}

@@ -1,0 +1,80 @@
+.steps {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.steps .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin: 16px 0;
+}
+
+.steps .cards .card {
+    flex-basis: 40%;
+    background: var(--color-overlay-background);
+    color: var(--color-overlay-text);
+    border-radius: 10px;
+}
+
+.steps .cards .card em {
+    font-style: normal;
+    display: none;
+}
+
+.steps .steps-list {
+    margin: 0 2rem;
+}
+
+.steps .steps-list .list-title {
+    text-align: left;
+}
+
+.steps .step {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.steps .step:not(:last-child) {
+    padding-bottom: 1rem;
+}
+
+.steps .step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    border-bottom: 1px solid rgba(255 255 255 / 60%);
+    width: 100%;
+    bottom: 0;
+}
+
+.steps .step .step-number {
+    font-size: 40px;
+    font-weight: 700;
+    width: 1rem;
+    color: var(--color-background-dark-light);
+}
+
+.steps .step .step-content {
+    margin-left: 2rem;
+    text-align: left;
+    font-family: 'gotham book', sans-serif;
+    font-size: var(--body-font-size-xs);
+}
+
+@media (min-width: 768px) {
+    .steps {
+        flex-direction: row;
+    }
+
+    .steps .cards .card em {
+        display: unset;
+        opacity: 0;
+    }
+
+    .steps .cards .card:hover em {
+        opacity: 1;
+    }
+}

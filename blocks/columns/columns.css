@@ -2,17 +2,77 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
+}
+
+.columns > div > div {
+    flex-basis: 100%;
+}
+
+.columns.no-rows > div {
+    flex-direction: row;
 }
 
 .columns.reverse > div {
     flex-direction: column-reverse;
 }
 
+.columns.no-wrap > div {
+    white-space: nowrap;
+    flex-direction: row;
+}
+
+.columns.full > div {
+    margin: 0 1rem;
+}
+
+.columns > div > div p em {
+    display: none;
+    font-style: normal;
+}
+
+.columns.no-wrap > div > div {
+    margin-left: 16px;
+}
+
+
+.columns.no-rows > div > div {
+    margin: 0 1em;
+}
+
+.columns.no-rows.reverse > div {
+    flex-direction: row-reverse;
+}
+
 .columns img {
     width: 100%;
 }
 
-@media (min-width: 900px) {
+.columns.full img {
+    width: 100vw;
+    max-width: 100vw;
+}
+
+.columns.last-optional.no-wrap > div> div:nth-child(n+5) {
+    display: none;
+}
+
+.columns > div > div .button-container {
+    text-align: center;
+}
+
+.columns.last-optional > div > div > p:not(.button-container):last-child {
+    display: none;
+    font-size: var(--body-font-size-xs);
+}
+
+@media (min-width: 480px) {
+    .columns > div > div > p:not(.button-container):last-child {
+        display: unset;
+    }
+}
+
+@media (min-width: 768px) {
     .columns > div,
     .columns.reverse > div {
         display: flex;
@@ -20,14 +80,37 @@
         flex-direction: unset;
     }
 
+    .columns.no-wrap > div > div {
+        margin-right: 32px;
+    }
+
+    .columns.full img {
+        width: 100vw;
+        max-width: 580px;
+    }
+
     /* stylelint-disable-next-line no-descending-specificity */
     .columns > div > div {
         flex: 1;
         margin-left: 32px;
         flex-basis: fit-content;
+        flex-grow: 0;
+    }
+
+    .columns > div > div p em {
+        display: unset;
     }
 
     .columns > div > div:first-of-type {
         margin-left: unset;
     }
+
+    .columns > div > div .button-container {
+        text-align: unset;
+    }
+
+    .columns.no-wrap > div> div:nth-child(n+5) {
+        display: unset;
+    }
+    
 }

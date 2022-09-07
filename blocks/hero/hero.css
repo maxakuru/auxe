@@ -10,9 +10,8 @@ main .hero-container {
 
 main .hero {
     position: relative;
-    padding: 32px;
     min-height: 300px;
-    margin: 0 4rem;
+    margin: 0 2rem;
 }
 
 main .hero h1 {
@@ -50,16 +49,17 @@ main .hero.small img {
     max-height: 400px;
 }
 
+.section.meta-background-image .hero {
+    padding-top: 6rem;
+}
+
 @media (min-width: 900px) {
     main .hero {
         margin: 0 8rem;
+        padding: 0 32px;
     }
 
     main .hero.small img {
         max-height: 500px;
-    }
-
-    .section.meta-background-image .hero {
-        padding-top: 6rem;
     }
 }

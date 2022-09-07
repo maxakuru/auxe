@@ -277,7 +277,7 @@ export function decorateSections($main) {
     section.setAttribute('data-section-status', 'initialized');
 
     // keys that are set as variables
-    const filterMeta = ['background-image', 'background-filter', 'background-transform'];
+    const filterMeta = ['background-image', 'background-filter', 'background-transform', 'background-color'];
 
     /* process section metadata */
     const sectionMeta = section.querySelector('div.section-metadata');
@@ -285,7 +285,7 @@ export function decorateSections($main) {
       const meta = readBlockConfig(sectionMeta);
       Object.entries(meta).forEach(([k, v]) => {
         if (k === 'style') {
-          section.classList.add(toClassName(v));
+          section.classList.add(...v.split(',').map(toClassName));
         } else if (filterMeta.includes(k)) {
           const metaKey = toClassName(k);
           section.classList.add(`meta-${metaKey}`);
@@ -304,6 +304,46 @@ export function decorateSections($main) {
       sectionMeta.remove();
     }
   });
+}
+
+export function createTag(name, attrs) {
+  const el = document.createElement(name);
+  if (typeof attrs === 'object') {
+    Object.entries(attrs).forEach(([k, v]) => {
+      el.setAttribute(k, v);
+    });
+  }
+  return el;
+}
+
+export function getIcon(icons, alt, minBp) {
+  // eslint-disable-next-line no-param-reassign
+  icons = Array.isArray(icons) ? icons : [icons];
+  const [defaultIcon, mobileIcon] = icons;
+  const ogIcon = (mobileIcon && window.innerWidth < 600) ? mobileIcon : defaultIcon;
+  let icon = ogIcon;
+
+  let rotation;
+  if (icon.startsWith('arrow-')) {
+    const direction = icon.substring('arrow-'.length);
+    icon = 'arrow';
+    if (direction === 'left') {
+      rotation = 90;
+    } else if (direction === 'up') {
+      rotation = 180;
+    } else if (direction === 'right') {
+      rotation = 270;
+    }
+  }
+  return (`<img class="icon icon-${icon} icon-${ogIcon}${minBp ? ` v-${minBp}` : ''}" ${rotation
+    ? `style="transform:rotate(${rotation}deg);"`
+    : ''} src="/icons/${icon}.svg" alt="${alt || icon}">`);
+}
+
+export function getIconElement(icons, size, alt) {
+  const $div = createTag('div');
+  $div.innerHTML = getIcon(icons, alt, size);
+  return ($div.firstChild);
 }
 
 /**
@@ -531,6 +571,64 @@ export function decorateButtons(element) {
 }
 
 /**
+ * @param {string} url
+ * @param {string} prop
+ * @param {string} val
+ * @returns {string}
+ */
+function adjustSearchParams(url, prop, val) {
+  const [pathname, ...qpSeg] = url.split('?');
+  const qpStr = qpSeg.join('&');
+  if (!qpStr) return url;
+  const qps = new URLSearchParams(qpStr);
+  if (qps.get(prop)) {
+    qps.set(prop, val);
+  }
+  return `${pathname}?${qps.toString()}`;
+}
+
+/**
+ *
+ * @param {HTMLElement} element
+ */
+export function decorateImages(element) {
+  /**
+   * @param {HTMLElement} img - image or source element
+   */
+  const adjustWidth = (img, width) => {
+    if (!width || !width.trim()) return;
+    // eslint-disable-next-line no-param-reassign
+    if (width.endsWith('px')) width = width.substring(0, width.length - 2);
+    if (Number.isNaN(parseInt(width, 10))) return;
+    const srcset = img.getAttribute('srcset');
+    if (srcset) {
+      img.setAttribute('srcset', adjustSearchParams(srcset, 'width', width.trim()));
+    }
+
+    const src = img.getAttribute('src');
+    if (src) {
+      img.setAttribute('src', adjustSearchParams(src, 'width', width.trim()));
+    }
+  };
+
+  element.querySelectorAll('picture').forEach((pic) => {
+    const img = pic.querySelector('img');
+    const altText = img.getAttribute('alt');
+    const [alt, width, height] = altText.split(',');
+
+    img.setAttribute('alt', alt);
+    if (width && width.trim()) {
+      img.style.width = width.trim();
+      adjustWidth(img, width.trim());
+      pic.querySelectorAll('source').forEach((src) => adjustWidth(src, width.trim()));
+    }
+    if (height && height.trim()) {
+      img.style.height = height.trim();
+    }
+  });
+}
+
+/**
  * Adds the favicon.
  * @param {string} href The favicon URL
  */
@@ -671,6 +769,7 @@ export function decorateMain(main) {
  * loads everything needed to get to LCP.
  */
 async function loadEager(doc) {
+  decorateImages(doc);
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
