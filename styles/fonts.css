@@ -3,7 +3,7 @@
 
 @font-face {
   font-family: "Gotham Book";
-  src: url('/styles/fonts/GothamBook.otf') format('truetype');
+  src: url('/styles/fonts/GothamBook.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -11,7 +11,7 @@
 }
 @font-face {
   font-family: "Gotham Book";
-  src: url('/styles/fonts/GothamBookItalic.otf') format('opentype');
+  src: url('/styles/fonts/GothamBookItalic.ttf') format('opentype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;

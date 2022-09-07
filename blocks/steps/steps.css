@@ -16,11 +16,18 @@
     background: var(--color-overlay-background);
     color: var(--color-overlay-text);
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .steps .cards .card em {
     font-style: normal;
     display: none;
+}
+
+.steps .cards .card > div > h1 {
+    height: 80px;
+    margin-top: 1em;
+    color: var(--color-highlight);
 }
 
 .steps .steps-list {
@@ -29,17 +36,19 @@
 
 .steps .steps-list .list-title {
     text-align: left;
+    margin-bottom: 1rem;
+}
+
+
+.steps .steps-list .list-title > *:first-child {
+    margin: 1em 0;
 }
 
 .steps .step {
     display: flex;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     position: relative;
-}
-
-.steps .step:not(:last-child) {
-    padding-bottom: 1rem;
 }
 
 .steps .step:not(:last-child)::after {
@@ -67,14 +76,27 @@
 @media (min-width: 768px) {
     .steps {
         flex-direction: row;
+        padding: 2em 0;
+
+    }
+
+    .steps .cards .card div p:last-child {
+        margin: 1em;
     }
 
     .steps .cards .card em {
         display: unset;
         opacity: 0;
+        font-size: var(--body-font-size-xs);
+        color: var(--color-highlight);
+
     }
 
     .steps .cards .card:hover em {
         opacity: 1;
+    }
+
+    .steps .step .step-content {
+        font-size: var(--body-font-size-s);
     }
 }

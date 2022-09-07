@@ -112,7 +112,9 @@ h6 {
 }
 
 h1 {
-  font-size: var(--heading-font-size-xxl)
+  font-size: var(--heading-font-size-xxl);
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 h2 {
@@ -379,6 +381,10 @@ main img {
   .section>div {
     max-width: 1200px;
     margin: auto;
+  }
+
+  h1 {
+    margin-top: 1em;
   }
 }
 

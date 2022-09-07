@@ -46,11 +46,11 @@ main .hero img {
 
 main .hero.small img {
     width: auto;
-    max-height: 400px;
+    max-height: 300px;
 }
 
 .section.meta-background-image .hero {
-    padding-top: 6rem;
+    padding-top: 4rem;
 }
 
 @media (min-width: 900px) {
@@ -60,6 +60,10 @@ main .hero.small img {
     }
 
     main .hero.small img {
-        max-height: 500px;
+        max-height: 400px;
+    }
+
+    .section.meta-background-image .hero {
+        padding-top: 6rem;
     }
 }

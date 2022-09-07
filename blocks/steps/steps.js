@@ -25,8 +25,8 @@ function templateSteps(divs) {
       const number = numEl.innerText;
       numEl.remove();
       return `<div class="step">
-        <span class="step-number">${number}</span>
-        <span class="step-content">${d.innerText}</span>
+        <span class="step-number"><p>${number}</p></span>
+        <span class="step-content"><p>${d.innerText}</p></span>
       </div>`;
     }).join('\n')
   }</div>`;

@@ -2,7 +2,7 @@
 header nav {
   display: grid;
   grid-template:
-    'hamburger brand tools tools' var(--nav-height) 'sections sections sections sections' 1fr / 50px 1fr 50px;
+    'hamburger brand brand brand' var(--nav-height) 'sections sections sections sections' 1fr / 50px 1fr 50px;
   align-items: center;
   padding: 0 1rem;
   position: fixed;
@@ -138,19 +138,9 @@ header nav[aria-expanded='true'] .nav-sections {
   align-self: flex-start;
 }
 
-header nav .nav-sections>ul>li {
-  margin: 1rem 0 0 1rem;
-  font-weight: 600;
-}
-
 header nav .nav-sections>ul>li,
 header nav .nav-sections>ul>li>ul>li {
   position: relative;
-}
-
-header nav .nav-sections>ul>li>ul>li {
-  margin: 0.5rem 0 0 1rem;
-  font-weight: 400;
 }
 
 
@@ -159,14 +149,16 @@ header nav .nav-tools {
   grid-area: tools;
   flex: 0 0 auto;
   height: 100%;
-  display: flex;
   align-items: center;
+  display: none;
 }
 
 header nav[aria-expanded='true'] .nav-tools {
   justify-content: space-around;
   align-items: flex-start;
   margin-top: 6rem;
+  display: flex;
+
 }
 
 header nav .nav-tools p {
@@ -191,6 +183,16 @@ header nav[aria-expanded='true'] .nav-tools li {
   padding: 0;
 }
 
+header nav[aria-expanded='true'] .nav-sections>ul>li {
+  margin: 1rem 0 0 1rem;
+  font-weight: 600;
+}
+
+header nav[aria-expanded='true'] .nav-sections>ul>li>ul>li {
+  margin: 0.5rem 0 0 1rem;
+  font-weight: 400;
+}
+
 header nav *:not(.button-container) > a:any-link:not(:hover) {
   color: currentcolor;
 }
@@ -199,10 +201,16 @@ header nav *:not(.button-container) > a:any-link:not(:hover) {
 @media (min-width: 905px) {
   header nav {
     display: flex;
+    grid-template:
+    'hamburger brand tools tools' var(--nav-height) 'sections sections sections sections' 1fr / 50px 1fr 50px;
     justify-content: space-between;
     height: var(--nav-height);
     padding: 16px 2rem;
     background-color: var(--color-background);
+  }
+
+  header nav .nav-tools {
+    display: unset;
   }
 
   header nav .nav-sections>ul>li.nav-drop {
