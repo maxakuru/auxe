@@ -7,18 +7,29 @@ header nav {
   padding: 0 1rem;
   position: fixed;
   z-index: 1;
-  background-color: var(--color-background);
   width: 100vw;
   height: var(--nav-height);
   box-sizing: border-box;
   font-family: var(--body-font-family);
+  background-color: var(--color-nav-background);
+  color: var(--color-nav-text)
 }
 
 header nav[aria-expanded='true'] {
-  grid-template: 'hamburger brand''sections sections''tools tools';
-  grid-template-columns: 56px 1fr;
+  grid-template: 'hamburger brand brand' var(--nav-height)
+  'sections sections sections' 1fr
+  'tools tools tools' 2fr;
+  grid-template-columns: 50px 1fr;
   overflow-y: scroll;
   min-height: 100vh;
+  background-color: var(--color-menu-background);
+  color: var(--color-menu-text);
+}
+
+header nav[aria-expanded='true'] .button-container a {
+  background-color: unset;
+  border: 3px solid currentcolor;
+  color: var(--color-menu-text);
 }
 
 /* brand */
@@ -79,6 +90,7 @@ header nav[aria-expanded='true'] .nav-hamburger-icon {
   border: 2px solid transparent;
   border-radius: 5px;
   transform: translate(-3px, -2px);
+  margin-right: -2px;
 }
 
 header nav[aria-expanded='true'] .nav-hamburger-icon::after,
@@ -105,7 +117,7 @@ header nav .nav-sections {
   grid-area: sections;
   flex-direction: column;
   display: none;
-  background-color: var(--color-overlay-background);
+  background-color: var(--color-background-menu);
   flex: 1 1 auto;
 }
 
@@ -126,9 +138,19 @@ header nav[aria-expanded='true'] .nav-sections {
   align-self: flex-start;
 }
 
+header nav .nav-sections>ul>li {
+  margin: 1rem 0 0 1rem;
+  font-weight: 600;
+}
+
 header nav .nav-sections>ul>li,
 header nav .nav-sections>ul>li>ul>li {
   position: relative;
+}
+
+header nav .nav-sections>ul>li>ul>li {
+  margin: 0.5rem 0 0 1rem;
+  font-weight: 400;
 }
 
 
@@ -139,6 +161,12 @@ header nav .nav-tools {
   height: 100%;
   display: flex;
   align-items: center;
+}
+
+header nav[aria-expanded='true'] .nav-tools {
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-top: 6rem;
 }
 
 header nav .nav-tools p {
@@ -174,6 +202,7 @@ header nav *:not(.button-container) > a:any-link:not(:hover) {
     justify-content: space-between;
     height: var(--nav-height);
     padding: 16px 2rem;
+    background-color: var(--color-background);
   }
 
   header nav .nav-sections>ul>li.nav-drop {

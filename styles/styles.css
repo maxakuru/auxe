@@ -29,6 +29,10 @@
   --color-button-disabled: #eee;
   --color-footer-link: #fff;
   --color-footer-link-hover: #3144cf;
+  --color-menu-background: #95c7ff;
+  --color-menu-text: #fff;
+  --color-nav-background: #fff;
+  --color-nav-text: #000;
 
   /* gradients */
   --gradient-background-dark: linear-gradient(5deg, #95c7ff, #248bff);
@@ -136,7 +140,6 @@ h6 {
 p,
 dl,
 ol,
-ul,
 pre,
 blockquote {
   margin-top: 1em;

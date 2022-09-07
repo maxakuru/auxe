@@ -12,3 +12,8 @@ html {
 *:after {
   box-sizing: inherit;
 }
+
+ul, li {
+  margin: 0;
+  list-style: none;
+}
