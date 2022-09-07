@@ -109,7 +109,7 @@
         text-align: unset;
     }
 
-    .columns.no-wrap > div> div:nth-child(n+5) {
+    .columns.last-optional.no-wrap > div> div:nth-child(n+5) {
         display: unset;
     }    
 }

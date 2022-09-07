@@ -64,7 +64,7 @@
   --font-weight-light: 200;
 
   /* nav height */
-  --nav-height: 80px;
+  --nav-height: 60px;
 }
 
 body {
@@ -360,6 +360,12 @@ main img {
 @media (min-width: 600px) {
   main .section {
     padding: 0 32px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --nav-height: 80px;
   }
 }
 
