@@ -1,3 +1,8 @@
+.carousel {
+  max-width: 1000px;
+  margin: auto;
+}
+
 .carousel > div {
   position: relative;
   overflow: hidden;
@@ -49,4 +54,14 @@
 
 .carousel .carousel-item p {
   margin: 2rem 0;
+}
+
+@media (min-width: 768px) {
+  .carousel .carousel-item {
+    margin: 0 6rem;
+  }
+
+  .carousel span.arrow {
+    padding: 2em 1em;
+  }
 }

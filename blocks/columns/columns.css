@@ -111,6 +111,5 @@
 
     .columns.no-wrap > div> div:nth-child(n+5) {
         display: unset;
-    }
-    
+    }    
 }
